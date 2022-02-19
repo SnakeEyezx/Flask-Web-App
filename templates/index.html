@@ -35,36 +35,43 @@
   <div class="row mt-3">
     <div class="col-12">
       <h1 class="display-5 text-center">Зачем нужен стабилизатор?</h1>
-      {{ descr.model }}
       <hr>
     </div>
-    <div class="col-7">
-      <p>Стабилизатор напряжения – это устройство обеспечивающее защиту электрооборудования от колебаний сетевого напряжения,
-        которые могут привести к поломкам оборудования, подключенного к электросети.
-        Установка стабилизатора обеспечивает корректную работу бытовой техники, оборудования,
-        также предотвращает преждевременный выход из строя.</p>
-    </div>
-    <div class="col-5">
+    <div class="col-12">
+      <p class="lead text-center">Стабилизатор напряжения обеспечивает защиту электрооборудования<br> и корректную работу:</p>
+      <ul class="fw-light fs-6">
+        <li>бытовой техники</li>
+        <li>торгового оборудования</li>
+        <li>освещения</li>
+        <li>электроинструмента</li>
+        <li>холодильного оборудования</li>
+        <li>и других устройств.</li>
+      </ul>
+      <p class="fw-normal fs-6 text-center">Стабилизатор предотвращает преждевременный<br> износ и выход из строя электротехники.</p>
+  </div>
+    <div class="col-12">
       <figure class="figure">
         <img src="{{ url_for('static', filename='media/lamp.jpg') }}" class="figure-img img-fluid rounded" alt="...">
       </figure>
     </div>
-    <hr>
-  </div>
-
-  <div class="col-12 mt-5">
+    <div class="col-12 mt-4">
     <h1 class="display-5 text-center">Как правильно выбрать стабилизатор?</h1>
     <hr>
   </div>
-  <div class="col-12">
-    <p>Для выбора стабилизатора нужно учитывать максимальная мощность подключаемого оборудования,
-      бытовой техники, предельные отклонения напряжения электросети и интенсивность перепадов входного напряжения.
-      В случае отсутствия этих данных мы окажем бесплатную консультацию по выбору модели и
-      мощности стабилизатора напряжения для вашей электросети.</p>
+    <div class="col-12">
+    <p class="fw-light fs-4 text-center">Для выбора стабилизатора<br>нужно учитывать:</p>
+    <ul class="fw-light fs-6">
+      <li>максимальную мощность подключаемого оборудования и бытовой техники</li>
+      <li>предельные отклонения напряжения электросети</li>
+      <li>интенсивность перепадов</li>
+    </ul>
+      <p class="fw-normal fs-6 text-center">Мы оказывыаем бесплатную консультацию<br> по выбору оптимальной модели стабилизатора для Ваших условий эксплуатации.</p>
+
     <div class="d-grid gap-2">
       <a href="tel:+79785559705"
          class="btn btn-primary btn-lg mt-3 wow zoomIn icon-mobile text-center m-phone-button">+7 978 555 97 05</a>
     </div>
+  </div>
   </div>
 
 
@@ -133,15 +140,14 @@
         Применяются в быту, коммерческих объектах ,промышленности.</p>
     </div>
     {% for product in energotech %}
-    <div class="col-6">
-      <h5 class="text-center display-4">{{ product.model }}</h5>
-      <figure class="figure">
+    <div class="col-12">
+      <h1 class="text-center display-4">{{ product.model }} {{ product.power }}</h1>
+      <figure class="figure d-flex justify-content-center">
         <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}" class="figure-img img-fluid rounded" alt="...">
       </figure>
       <hr>
-      <p>
-        power: {{ product.power }} <br> price: {{ product.price }}$
-      </p>
+      <p class="lead display-6">{{ product.voltage_input_type }}</p>
+      <p class="lead display-6">Цена: {{ product.price  }} р.</p>
       <div class="d-grid gap-2 mt-5">
         <a class="btn btn-lg btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
       </div>
