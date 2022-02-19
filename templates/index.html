@@ -140,16 +140,33 @@
         Применяются в быту, коммерческих объектах ,промышленности.</p>
     </div>
     {% for product in energotech %}
-    <div class="col-12">
-      <h1 class="text-center display-4">{{ product.model }} {{ product.power }}</h1>
+    <div class="col-6">
+      <h1 class="text-center display-4">{{ product.model }}</h1>
       <figure class="figure d-flex justify-content-center">
         <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}" class="figure-img img-fluid rounded" alt="...">
       </figure>
       <hr>
-      <p class="lead display-6">{{ product.voltage_input_type }}</p>
-      <p class="lead display-6">Цена: {{ product.price  }} р.</p>
-      <div class="d-grid gap-2 mt-5">
-        <a class="btn btn-lg btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
+      <ul class="list-unstyled fw-light fs-6">
+        <li class="d-flex">
+          <div class="flex-grow-1">Тип: </div>
+          <div>{{ product.voltage_input_type }}</div>
+        </li>
+        <li class="d-flex">
+          <div class="flex-grow-1">Мощность: </div>
+          <div>{{ product.power }} Вт</div>
+        </li>
+        <li class="d-flex">
+          <div class="flex-grow-1">Вес: </div>
+          <div>{{ product.weight  }} кг</div>
+        </li>
+        <li class="d-flex">
+          <div class="flex-grow-1 fs-5">Цена: </div>
+          <div class="fw-normal fs-5">{{ product.price  }} р.</div>
+        </li>
+        <li class=""></li>
+      </ul>
+      <div class="d-grid mt-2">
+        <a class="btn btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
       </div>
     </div>
     {% endfor %}
