@@ -35,12 +35,14 @@
   <div class="row mt-3">
     <div class="col-12">
       <h1 class="display-5 text-center">Зачем нужен стабилизатор?</h1>
+      {{ descr.model }}
       <hr>
     </div>
     <div class="col-7">
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum ullam,
-        odit quidem quia maiores molestias sit! Totam reprehenderit tempora pariatur
-        necessitatibus rem qui adipisci commodi corrupti</p>
+      <p>Стабилизатор напряжения – это устройство обеспечивающее защиту электрооборудования от колебаний сетевого напряжения,
+        которые могут привести к поломкам оборудования, подключенного к электросети.
+        Установка стабилизатора обеспечивает корректную работу бытовой техники, оборудования,
+        также предотвращает преждевременный выход из строя.</p>
     </div>
     <div class="col-5">
       <figure class="figure">
@@ -55,9 +57,10 @@
     <hr>
   </div>
   <div class="col-12">
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum ullam,
-      odit quidem quia maiores molestias sit! Totam reprehenderit tempora pariatur
-      necessitatibus rem qui adipisci commodi corrupti</p>
+    <p>Для выбора стабилизатора нужно учитывать максимальная мощность подключаемого оборудования,
+      бытовой техники, предельные отклонения напряжения электросети и интенсивность перепадов входного напряжения.
+      В случае отсутствия этих данных мы окажем бесплатную консультацию по выбору модели и
+      мощности стабилизатора напряжения для вашей электросети.</p>
     <div class="d-grid gap-2">
       <a href="tel:+79785559705"
          class="btn btn-primary btn-lg mt-3 wow zoomIn icon-mobile text-center m-phone-button">+7 978 555 97 05</a>
@@ -118,17 +121,18 @@
   <!--Carousell-->
 
 
-  <!-- Brand menu -->
+  <!-- Brand «ЭНЕРГОТЕХ» -->
   <div class="row my-5 gy-3">
     <div class="col-12">
-      <h1 class="display-5 text-center">Энерготех</h1>
+      <h1 class="display-5 text-center">«ЭНЕРГОТЕХ»</h1>
       <hr>
     </div>
     <div class="col-12">
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum ullam,
-        odit quidem quia maiores mol</p>
+      <p>Отличаются высокой надежностью и безупречным качеством изготовления на современном оборудовании.
+        Стабилизаторы тиристорного типа с инновационным алгоритмом управления. Изготовлены в России. Гарантийный срок эксплуатации от 5 до 10 лет.
+        Применяются в быту, коммерческих объектах ,промышленности.</p>
     </div>
-    {% for product in products %}
+    {% for product in energotech %}
     <div class="col-6">
       <h5 class="text-center display-4">{{ product.model }}</h5>
       <figure class="figure">
@@ -136,77 +140,77 @@
       </figure>
       <hr>
       <p>
-        power: {{ product.param_power }} <br> price: {{ product.price }}$
+        power: {{ product.power }} <br> price: {{ product.price }}$
       </p>
       <div class="d-grid gap-2 mt-5">
-        <a class="btn btn-lg btn-primary" href="view_products/{{ product.model_link}}">Подробрнее..</a>
+        <a class="btn btn-lg btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
       </div>
     </div>
     {% endfor %}
   </div>
-  <!-- Brandshop menu -->
+  <!-- Brand «ЭНЕРГОТЕХ» -->
 
-
-  <!-- Model View -->
-  <div class="container">
-    <div class="row">
-      <h1 class="display-2 text-center">Энерготех TOP 6000</h1>
-      <div class="col-12">
-        <div class="ModelViewSlider">
-          <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
-          <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
-          <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
-          <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
-        </div>
-        <h1 class="display-4">Price: 1000$</h1>
-        <p class="h4">Описание</p>
-        <p class="lead">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsum adipisci minima? Ad quas facere,
-          incidunt velit iure, repellendus maiores ab labore doloribus ea aspernatur numquam consectetur, odit error assumenda.
-        </p>
-        <table class="table table-bordered table-hover item-tab mt-4">
-          <thead class="table-dark text-center">
-          <tr>
-            <th colspan="2">Характеристики</th>
-          </tr>
-          </thead>
-          <tbody class="text-center">
-          <tr>
-            <td>Мощность</td>
-            <td>6000ВА</td>
-          </tr>
-          <tr>
-            <td>Тип</td>
-            <td>симисторный</td>
-          </tr>
-          <tr>
-            <td>Диапозон вх. напряжения</td>
-            <td><span>145÷280</span>&nbsp;В</td>
-          </tr>
-          <tr>
-            <td>Точность</td>
-            <td>+\- 1,5%</td>
-          </tr>
-          <tr>
-            <td>Гарантия</td>
-            <td>5 лет</td>
-          </tr>
-          <tr>
-            <td>Масса(не более)</td>
-            <td>24 кг</td>
-          </tr>
-          </tbody>
-        </table>
-        <div class="d-grid gap-2">
-          <button type="button" class="btn btn-danger">Заказать..</button>
-        </div>
+   <!-- Brand «ВОЛЬТ ENGINEERING» -->
+  <div class="row my-5 gy-3">
+    <div class="col-12">
+      <h1 class="display-5 text-center">«ВОЛЬТ ENGINEERING»</h1>
+      <hr>
+    </div>
+    <div class="col-12">
+      <p>Современные и высокотехнологичные стабилизаторы напряжения.
+        Отлично подходят  для для стабилизации напряжения электросети квартиры, дома.
+        Стабилизаторы изготавливаются двух типов стабилизации – гибридного и тиристорного.
+        Стабилизаторы имеют отличный дизайн и изготовлены в России.
+        Гарантийный срок эксплуатации составляет от 2 до 5 лет.</p>
+    </div>
+    {% for product in volt %}
+    <div class="col-6">
+      <h5 class="text-center display-4">{{ product.model }}</h5>
+      <figure class="figure">
+        <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}" class="figure-img img-fluid rounded" alt="...">
+      </figure>
+      <hr>
+      <p>
+        power: {{ product.power }} <br> price: {{ product.price }}$
+      </p>
+      <div class="d-grid gap-2 mt-5">
+        <a class="btn btn-lg btn-primary" href="view_products/{{ volt.model_link}}">Подробрнее..</a>
       </div>
     </div>
+    {% endfor %}
   </div>
-  <!-- Model View -->
+  <!-- Brand «ВОЛЬТ ENGINEERING» -->
 
-
-
+   <!-- Brand «ЭЛИМ» -->
+  <div class="row my-5 gy-3">
+    <div class="col-12">
+      <h1 class="display-5 text-center">«ЭЛИМ»</h1>
+      <hr>
+    </div>
+    <div class="col-12">
+      <p>Надежные электромеханические стабилизаторы напряжения.
+        Отличаются  хорошей перегрузочной способностью и точностью выходного напряжения.
+        Подходят для решения проблем с электропитанием в дачных домах, квартирах.
+        Аппараты изготавливаются как в навесном, так и напольном исполнении.
+        Изготовлено в Китае. Гарантия 1 год..</p>
+    </div>
+    {% for product in elim %}
+    <div class="col-6">
+      <h5 class="text-center display-4">{{ product.model }}</h5>
+      <figure class="figure">
+        <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}" class="figure-img img-fluid rounded" alt="...">
+      </figure>
+      <hr>
+      <p>
+        power: {{ product.power }} <br> price: {{ product.price }}$
+      </p>
+      <div class="d-grid gap-2 mt-5">
+        <a class="btn btn-lg btn-primary" href="view_products/{{ elim.model_link }}">Подробрнее..</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- Brand «ЭЛИМ» -->
 
 
 

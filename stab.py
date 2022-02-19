@@ -11,24 +11,44 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     model = db.Column(db.String(30), nullable=False)
     brand = db.Column(db.String(30), nullable=False)
+    power = db.Column(db.Integer, nullable=False)
+    voltage_input_type = db.Column(db.String(30), nullable=False)
     price = db.Column(db.String(30), nullable=False)
-    description = db.Column(db.String(120), nullable=False)
-    param_power = db.Column(db.Integer, nullable=False)
-    param_type = db.Column(db.String(30), nullable=False)
-    param_voltage = db.Column(db.String(30), nullable=False)
-    param_accuracy = db.Column(db.String(30), nullable=False)
-    param_warranty = db.Column(db.Integer, nullable=False)
-    param_weight = db.Column(db.Integer, nullable=False)
-    model_link = db.Column(db.String(50), nullable=False)
+    weight = db.Column(db.Integer, nullable=False)
+    model_link = db.Column(db.String(150), nullable=False, unique=True)
 
     def __repr__(self):
         return '<Product %r>' % self.model
 
 
+class Description(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    model = db.Column(db.String(30), nullable=False)
+    brand = db.Column(db.String(30), nullable=False)
+    voltage_input_type = db.Column(db.String(30), nullable=False)
+    description = db.Column(db.String(120))
+    operating_mode = db.Column(db.String(30), nullable=False)
+    stages_of_regulation = db.Column(db.Integer, nullable=False)
+    deviation_of_output_voltages = db.Column(db.String(30), nullable=False)
+    input_voltage_range = db.Column(db.String(30), nullable=False)
+    output_voltage_range = db.Column(db.String(30), nullable=False)
+    extreme_input_voltage_range = db.Column(db.String(30), nullable=False)
+    reaction_time = db.Column(db.Integer, nullable=False)
+    emergency_reaction_time = db.Column(db.Integer, nullable=False)
+    thermal_protection = db.Column(db.Integer, nullable=False)
+    warranty = db.Column(db.String(30), nullable=False)
+
+    def __repr__(self):
+        return '<Description %r>' % self.model
+
+
 @app.route("/")
-def hello_world():
-    products = Product.query.all()
-    return render_template('index.html', products=products)
+def index():
+    energotech = Product.query.filter_by(brand="Энерготех")
+    volt = Product.query.filter_by(brand="Вольт")
+    elim = Product.query.filter_by(brand="Элим")
+    descr = Description.query.filter_by(brand="Энерготех")
+    return render_template('index.html', energotech=energotech, volt=volt, elim=elim, descr=descr)
 
 
 @app.route("/add_product", methods=['POST', 'GET'])
@@ -36,50 +56,83 @@ def add_product():
     if request.method == 'POST':
         product_model_name = request.form['model']
         product_brand_name = request.form['brand']
+        product_voltage_input_type = request.form['voltage_input_type']
         product_price = request.form['price']
-        product_description = request.form['description']
-        product_param_power = request.form['param_power']
-        product_param_type = request.form['param_type']
-        product_param_voltage = request.form['param_voltage']
-        product_param_accuracy = request.form['param_accuracy']
-        product_param_warranty = request.form['param_warranty']
-        product_param_weight = request.form['param_weight']
-        product_link = slugify(request.form['brand'] + " " + request.form['model'])
-        new_product = Product(model=product_model_name, brand=product_brand_name, price=product_price,
-                              description=product_description, param_power=product_param_power,
-                              param_type=product_param_type, param_voltage=product_param_voltage,
-                              param_accuracy=product_param_accuracy, param_warranty=product_param_warranty,
-                              param_weight=product_param_weight, model_link=product_link)
+        product_power = request.form['power']
+        product_weight = request.form['weight']
+        product_link = slugify(' '.join(str(item) for item in [product_brand_name, product_model_name,
+                                                               product_power, product_voltage_input_type]))
+        new_product = Product(model=product_model_name,
+                              brand=product_brand_name,
+                              voltage_input_type=product_voltage_input_type,
+                              price=product_price,
+                              power=product_power,
+                              weight=product_weight,
+                              model_link=product_link)
         try:
             db.session.add(new_product)
             db.session.commit()
         finally:
-            return "add done!"
+            return "Product added, done!"
     else:
         return render_template('add_product.html')
 
 
+@app.route("/add_description", methods=['POST', 'GET'])
+def add_description():
+    if request.method == 'POST':
+        description_model_name = request.form['model']
+        description_brand_name = request.form['brand']
+        description_voltage_input_type = request.form['voltage_input_type']
+        description_description = request.form['description']
+        description_operating_mode = request.form['operating_mode']
+        description_stages_of_regulation = request.form['stages_of_regulation']
+        description_deviation_of_output_voltages = request.form['deviation_of_output_voltages']
+        description_input_voltage_range = request.form['input_voltage_range']
+        description_output_voltage_range = request.form['output_voltage_range']
+        description_extreme_input_voltage_range = request.form['extreme_input_voltage_range']
+        description_reaction_time = request.form['reaction_time']
+        description_emergency_reaction_time = request.form['emergency_reaction_time']
+        description_thermal_protection = request.form['thermal_protection']
+        description_warranty = request.form['description_warranty']
+        new_description = Description(model=description_model_name,
+                                      brand=description_brand_name,
+                                      voltage_input_type=description_voltage_input_type,
+                                      description=description_description,
+                                      operating_mode=description_operating_mode,
+                                      stages_of_regulation=description_stages_of_regulation,
+                                      deviation_of_output_voltages=description_deviation_of_output_voltages,
+                                      input_voltage_range=description_input_voltage_range,
+                                      output_voltage_range=description_output_voltage_range,
+                                      extreme_input_voltage_range=description_extreme_input_voltage_range,
+                                      reaction_time=description_reaction_time,
+                                      emergency_reaction_time=description_emergency_reaction_time,
+                                      thermal_protection=description_thermal_protection,
+                                      warranty=description_warranty)
+        try:
+            db.session.add(new_description)
+            db.session.commit()
+        except Exception as err:
+            print('Query Failed: %s\nError: %s' % (new_description, str(err)))
+        finally:
+            return "Descr added!"
+    else:
+        return render_template('add_description.html')
+
+
 @app.route("/view_products/<single_model_link>")
 def view_products(single_model_link):
-    products = Product.query.filter_by(model_link=single_model_link)
-    # result = db.session.execute(products)
-    # for user_obj in result.scalars():
-    #     link = "/".join([translit(user_obj.brand, reversed=True), user_obj.model, str(user_obj.id)])
-    #     print(link)  # f"{user_obj.id} {user_obj.model} {user_obj.model}"
-    #   translit_brand = translit(text, 'ru')
-    return render_template('view_products.html', products=products)
+    product = Product.query.filter_by(model_link=single_model_link)
+    description_query = Description.query.filter_by(voltage_input_type=Product.voltage_input_type,
+                                                    brand=Product.brand, model=Product.model)
+    return render_template('view_products.html', product=product, model_descriptions=description_query)
 
 
-@app.route("/create_all")
-def create_tables():
-    db.create_all()
-    return "Create_all done!"
-
-
-@app.route("/drop_all")
-def drop_tables():
+@app.route("/reset")
+def reset():
     db.drop_all()
-    return "Drop_all done!"
+    db.create_all()
+    return "Reset done!"
 
 
 if __name__ == "__main__":

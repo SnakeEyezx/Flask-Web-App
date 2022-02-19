@@ -2,21 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стабилизаторы.рф</title>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
 </head>
 <body>
-<form action="/add_product" method="post">
-        <input type="text" placeholder="model" name="model">
-        <input type="text" placeholder="brand" name="brand">
-        <input type="text" placeholder="price" name="price">
-        <input type="text" placeholder="description" name="description">
-        <input type="text" placeholder="param_power" name="param_power">
-        <input type="text" placeholder="param_type" name="param_type">
-        <input type="text" placeholder="param_voltage" name="param_voltage">
-        <input type="text" placeholder="param_accuracy" name="param_accuracy">
-        <input type="text" placeholder="param_warranty" name="param_warranty">
-        <input type="text" placeholder="param_weight" name="param_weight">
-        <input type="submit" value="Add product" class="btn">
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <form class="mt-5" action="/add_product" method="post">
+                <input class="form-control mb-1" type="text" placeholder="model" name="model">
+                <input class="form-control mb-1" type="text" placeholder="brand" name="brand">
+                <input class="form-control mb-1" type="text" placeholder="voltage_input_type" name="voltage_input_type">
+                <input class="form-control mb-1" type="text" placeholder="price" name="price">
+                <input class="form-control mb-1" type="text" placeholder="power" name="power">
+                <input class="form-control mb-1" type="text" placeholder="weight" name="weight">
+                <input class="btn btn-lg btn-primary mt-3" type="submit" value="Add product">
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

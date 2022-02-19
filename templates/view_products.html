@@ -15,9 +15,9 @@
 <body>
 <div class="container">
   <div class="row">
-         {% for product in products %}
-    <h1 class="display-2 text-center">{{ product.brand }}</h1>
-    <h1 class="display-3 text-center">{{ product.model }}</h1>
+    {% for prod in product %}
+    <h1 class="display-2 text-center">{{ prod.brand }}</h1>
+    <h1 class="display-3 text-center">{{ prod.model }} {{ prod.power }}</h1>
     <div class="col-12">
       <div class="ModelViewSlider">
         <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
@@ -25,10 +25,12 @@
         <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
         <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
       </div>
-      <h1 class="display-4">Price: {{ product.price }}$</h1>
+      <h1 class="display-4">Цена: {{ prod.price }}$</h1>
+      {% endfor %}
+      {% for model_description in model_descriptions %}
       <p class="h4">Описание</p>
         <p class="lead">
-          {{ product.description }}
+          {{ model_description.description }}
         </p>
         <table class="table table-bordered table-hover item-tab mt-4">
           <thead class="table-dark text-center">
@@ -37,38 +39,69 @@
           </tr>
           </thead>
           <tbody class="text-center">
+          {% for prod in product %}
           <tr>
           <td>Мощность</td>
-          <td>{{ product.param_power }}ВА</td>
+          <td>{{ prod.power }} Вт</td>
           </tr>
+          {% endfor %}
           <tr>
           <td>Тип</td>
-          <td>{{ product.param_type }}</td>
+          <td>{{ model_description.voltage_input_type }}</td>
           </tr>
           <tr>
-          <td>Диапозон вх. напряжения</td>
-          <td><span>{{ product.param_voltage }}</span>&nbsp;В</td>
+          <td>Режим работы</td>
+          <td><span>{{ model_description.operating_mode }}</span></td>
           </tr>
           <tr>
-          <td>Точность</td>
-          <td>+\- {{ product.param_accuracy }}%</td>
+          <td>Количество ступеней регулирования</td>
+          <td>+\- {{ model_description.stages_of_regulation }}%</td>
+          </tr>
+          <tr>
+          <td>Отклонение выходных напряжений(V)</td>
+          <td>{{ model_description.deviation_of_output_voltages }}</td>
+          </tr>
+          <tr>
+          <td>Номинальный диапазон входного (сетевого) напряжения(V)</td>
+          <td>{{ model_description.input_voltage_range }} кг</td>
+          </tr>
+          <tr>
+          <td>Номинальный диапазон выходного напряжения(V)</td>
+          <td>{{ model_description.output_voltage_range }} кг</td>
+          </tr>
+          <tr>
+          <td>Предельно допустимый диапазон входного (сетевого)) напряжения(V)</td>
+          <td>{{ model_description.extreme_input_voltage_range }} кг</td>
+          </tr>
+          <tr>
+          <td>Время реакции на изменение напряжения</td>
+          <td>{{ model_description.reaction_time }} мс</td>
+          </tr>
+          <tr>
+          <td>Время реакции на аварийное изменение напряжения</td>
+          <td>{{ model_description.emergency_reaction_time }} мс</td>
+          </tr>
+          <tr>
+          <td>Температура срабатывания тепловой защиты</td>
+          <td>{{ model_description.thermal_protection }}°C</td>
           </tr>
           <tr>
           <td>Гарантия</td>
-          <td>{{ product.param_warranty }} лет</td>
+          <td>{{ model_description.warranty }}</td>
           </tr>
+          {% for prod in product %}
           <tr>
-          <td>Масса(не более)</td>
-          <td>{{ product.param_weight }} кг</td>
+          <td>Вес</td>
+          <td>{{ prod.weight }} кг</td>
           </tr>
+          {% endfor %}
           </tbody>
           </table>
           <div class="d-grid gap-2">
             <button type="button" class="btn btn-lg btn-danger">Заказать..</button>
           </div>
     </div>
-      {% endfor %}
-
+{% endfor %}
   </div>
 </div>
 <!-- FOOTER MENU -->
