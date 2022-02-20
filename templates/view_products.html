@@ -11,22 +11,87 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='slick/slick.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='slick/slick-theme.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/photoswipe.css') }}/">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default-skin/default-skin.css') }}">
 </head>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+  <!-- Background of PhotoSwipe.
+       It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg"></div>
+
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+
+    <!-- Container that holds slides.
+        PhotoSwipe keeps only 3 of them in the DOM to save memory.
+        Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+
+      <div class="pswp__top-bar">
+
+        <!--  Controls are self-explanatory. Order can be changed. -->
+
+        <div class="pswp__counter"></div>
+
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+        <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
+      </div>
+
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+      </button>
+
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+      </button>
+
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 <body>
 <div class="container">
   <div class="row">
-    {% for prod in product %}
-    <h1 class="display-2 text-center">{{ prod.brand }}</h1>
-    <h1 class="display-3 text-center">{{ prod.model }} {{ prod.power }}</h1>
+    <h1 class="display-2 text-center">{{ product.brand }}</h1>
+    <h1 class="display-3 text-center">{{ product.model }} {{ product.power }}</h1>
     <div class="col-12">
-      <div class="ModelViewSlider">
-        <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
-        <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
-        <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
-        <div><img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="mx-auto" alt="..."></div>
+      <div class="ModelViewSlider" id="photo_swipe">
+        <div><img src="../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/01.jpg" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/02.jpg" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/03.jpg" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/04.jpg" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
       </div>
-      <h1 class="display-4">Цена: {{ prod.price }}$</h1>
-      {% endfor %}
+
+      <h1 class="display-4">Цена: {{ product.price }}$</h1>
       {% for model_description in model_descriptions %}
       <p class="h4">Описание</p>
         <p class="lead">
@@ -38,63 +103,55 @@
             <th colspan="2">Характеристики</th>
           </tr>
           </thead>
-          <tbody class="text-center">
-          {% for prod in product %}
+          <tbody class="">
           <tr>
           <td>Мощность</td>
-          <td>{{ prod.power }} Вт</td>
+          <td class="text-center align-middle">{{ product.power }} Вт</td>
           </tr>
-          {% endfor %}
           <tr>
           <td>Тип</td>
-          <td>{{ model_description.voltage_input_type }}</td>
+          <td class="text-center align-middle">{{ model_description.voltage_input_type }}</td>
           </tr>
           <tr>
           <td>Режим работы</td>
-          <td><span>{{ model_description.operating_mode }}</span></td>
+          <td class="text-center align-middle"><span>{{ model_description.operating_mode }}</span></td>
           </tr>
           <tr>
           <td>Количество ступеней регулирования</td>
-          <td>{{ model_description.stages_of_regulation }}</td>
+          <td class="text-center align-middle">{{ model_description.stages_of_regulation }}</td>
           </tr>
           <tr>
           <td>Отклонение выходных напряжений</td>
-          <td>{{ model_description.deviation_of_output_voltages }} %</td>
+          <td class="text-center align-middle">{{ model_description.deviation_of_output_voltages }} %</td>
           </tr>
           <tr>
-          <td>Номинальный диапазон входного(сетевого) напряжения</td>
-          <td>{{ model_description.input_voltage_range }} В</td>
+          <td>Номинальный диапазон<br>входного напряжения</td>
+          <td class="text-center align-middle">{{ model_description.input_voltage_range }} В</td>
           </tr>
           <tr>
           <td>Номинальный диапазон выходного напряжения</td>
-          <td>{{ model_description.output_voltage_range }} В</td>
+          <td class="text-center align-middle">{{ model_description.output_voltage_range }} В</td>
           </tr>
           <tr>
-          <td>Предельно допустимый диапазон входного(сетевого)) напряжения</td>
-          <td>{{ model_description.extreme_input_voltage_range }} В</td>
+          <td>Предельно допустимый диапазон входного напряжения</td>
+          <td class="text-center align-middle">{{ model_description.extreme_input_voltage_range }} В</td>
           </tr>
           <tr>
           <td>Время реакции на изменение напряжения</td>
-          <td>{{ model_description.reaction_time }} мс</td>
+          <td class="text-center align-middle">{{ model_description.reaction_time }} мс</td>
           </tr>
           <tr>
           <td>Время реакции на аварийное изменение напряжения</td>
-          <td>{{ model_description.emergency_reaction_time }} мс</td>
+          <td class="text-center align-middle">{{ model_description.emergency_reaction_time }} мс</td>
           </tr>
           <tr>
           <td>Температура срабатывания тепловой защиты</td>
-          <td>{{ model_description.thermal_protection }}°C</td>
+          <td class="text-center align-middle">{{ model_description.thermal_protection }}°C</td>
           </tr>
           <tr>
           <td>Гарантия</td>
-          <td>{{ model_description.warranty }}</td>
+          <td class="text-center align-middle">{{ model_description.warranty }}</td>
           </tr>
-          {% for prod in product %}
-          <tr>
-          <td>Вес</td>
-          <td>{{ prod.weight }} кг</td>
-          </tr>
-          {% endfor %}
           </tbody>
           </table>
           <div class="d-grid gap-2">
@@ -164,7 +221,59 @@
   <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='slick/slick.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/photoswipe.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/photoswipe-ui-default.min.js') }}"></script>
 
+  <script type="text/javascript">
+    var openPhotoSwipe = function() {
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+
+    // build items array
+    var items = [
+        {
+            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/01 OPTIMUM 5000 al.jpg',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/02 OPTIMUM 5000 al.jpg',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/03 OPTIMUM 5000 al.jpg',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/04 OPTIMUM 5000 al.jpg',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/05 OPTIMUM 5000 al.jpg',
+            w: 964,
+            h: 600
+        }
+    ];
+
+    // define options (if needed)
+    var options = {
+       // history & focus options are disabled on CodePen
+        history: false,
+        focus: false,
+
+        showAnimationDuration: 0,
+        hideAnimationDuration: 0
+
+    };
+
+    var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    gallery.init();
+};
+
+document.getElementById('photo_swipe').onclick = openPhotoSwipe;
+  </script>
   <script type="text/javascript">
     $(document).ready(function () {
       $('.ModelViewSlider').slick({
@@ -176,7 +285,7 @@
         centerMode: true,
         centerPadding: '80px',
         autoplay: true,
-        autoplaySpeed: 2200,
+        autoplaySpeed: 1500,
       });
     });
   </script>

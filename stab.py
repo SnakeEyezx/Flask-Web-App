@@ -44,11 +44,23 @@ class Description(db.Model):
 
 @app.route("/")
 def index():
-    energotech = Product.query.filter_by(brand="Энерготех")
+    energotech_onephase_optimum = Product.query.filter_by(brand="Энерготех", voltage_input_type="Однофазный",
+                                                          model='Optimum+')
+    energotech_onephase_infinity = Product.query.filter_by(brand="Энерготех", voltage_input_type="Однофазный",
+                                                           model='INFINITY')
+    energotech_treephase_optimum = Product.query.filter_by(brand="Энерготех", voltage_input_type="Трехфазный",
+                                                           model='Optimum+')
+    energotech_treephase_infinity = Product.query.filter_by(brand="Энерготех", voltage_input_type="Трехфазный",
+                                                            model='INFINITY')
     volt = Product.query.filter_by(brand="Вольт")
     elim = Product.query.filter_by(brand="Элим")
     descr = Description.query.filter_by(brand="Энерготех")
-    return render_template('index.html', energotech=energotech, volt=volt, elim=elim, descr=descr)
+    return render_template('index.html', energotech_onephase_optimum=energotech_onephase_optimum,
+                           energotech_onephase_infinity=energotech_onephase_infinity,
+                           energotech_treephase_optimum=energotech_treephase_optimum,
+                           energotech_treephase_infinity=energotech_treephase_infinity,
+                           volt=volt, elim=elim,
+                           descr=descr)
 
 
 @app.route("/add_product", methods=['POST', 'GET'])
@@ -122,9 +134,9 @@ def add_description():
 
 @app.route("/view_products/<single_model_link>")
 def view_products(single_model_link):
-    product = Product.query.filter_by(model_link=single_model_link)
-    description_query = Description.query.filter_by(voltage_input_type=Product.voltage_input_type,
-                                                    brand=Product.brand, model=Product.model)
+    product = Product.query.filter_by(model_link=single_model_link).first()
+    description_query = Description.query.filter_by(voltage_input_type=product.voltage_input_type,
+                                                    model=product.model)
     return render_template('view_products.html', product=product, model_descriptions=description_query)
 
 

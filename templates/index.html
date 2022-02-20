@@ -23,6 +23,7 @@
             aria-controls="offcanvasExample">Доставка</button>
   </div>
 </nav>
+
 <div class="container-fluid">
   <div class="row">
     <div class="head-logo">
@@ -84,7 +85,7 @@
   </div>
   <div class="">
     <div class="stabslider1 mt-4">
-      <div class="card mx-3">
+      <div class="card mx-2">
         <img src="{{ url_for('static', filename='media/01 OPTIMUM 5000_200x150_c4c.jpg') }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Card title1</h5>
@@ -97,7 +98,7 @@
 
         </div>
       </div>
-      <div class="card mx-3">
+      <div class="card mx-2">
         <img src="{{ url_for('static', filename='media/01 UNIVERSAL 5000_200x150_c4c.jpg') }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Card title2</h5>
@@ -110,7 +111,7 @@
 
         </div>
       </div>
-      <div class="card mx-3">
+      <div class="card mx-2">
         <img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Card title3</h5>
@@ -136,41 +137,216 @@
     </div>
     <div class="col-12">
       <p>Отличаются высокой надежностью и безупречным качеством изготовления на современном оборудовании.
-        Стабилизаторы тиристорного типа с инновационным алгоритмом управления. Изготовлены в России. Гарантийный срок эксплуатации от 5 до 10 лет.
+        Стабилизаторы тиристорного типа с инновационным алгоритмом управления. Изготовлены в России. Гарантийный срок
+        эксплуатации от 5 до 10 лет.
         Применяются в быту, коммерческих объектах ,промышленности.</p>
     </div>
-    {% for product in energotech %}
-    <div class="col-6">
-      <h1 class="text-center display-4">{{ product.model }}</h1>
-      <figure class="figure d-flex justify-content-center">
-        <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}" class="figure-img img-fluid rounded" alt="...">
-      </figure>
-      <hr>
-      <ul class="list-unstyled fw-light fs-6">
-        <li class="d-flex">
-          <div class="flex-grow-1">Тип: </div>
-          <div>{{ product.voltage_input_type }}</div>
+
+    <div class="col-12">
+      <ul class="nav nav-tabs nav-fill" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#onephase" type="button"
+                  role="tab" aria-controls="home" aria-selected="true">Однофазные
+          </button>
         </li>
-        <li class="d-flex">
-          <div class="flex-grow-1">Мощность: </div>
-          <div>{{ product.power }} Вт</div>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#threephase" type="button"
+                  role="tab" aria-controls="profile" aria-selected="false">Трехфазные
+          </button>
         </li>
-        <li class="d-flex">
-          <div class="flex-grow-1">Вес: </div>
-          <div>{{ product.weight  }} кг</div>
-        </li>
-        <li class="d-flex">
-          <div class="flex-grow-1 fs-5">Цена: </div>
-          <div class="fw-normal fs-5">{{ product.price  }} р.</div>
-        </li>
-        <li class=""></li>
       </ul>
-      <div class="d-grid mt-2">
-        <a class="btn btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
+      <h1 class="display-5 text-center my-5">Модели:</h1>
+    </div><!-- TABS NAV -->
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="onephase" role="tabpanel"><!--Однофаные модели-->
+        <ul class="nav nav-pills nav-justified" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#optimum_one" type="button"
+                    role="tab" aria-selected="true">OPTIMUM+
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#infinity_one" type="button"
+                    role="tab" aria-selected="false">INFINITY
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="optimum_one" role="tabpanel">
+
+          <div class="row">
+          {% for product in energotech_onephase_optimum %}
+          <div class="col-6">
+            <h1 class="text-center display-4">{{ product.model }}</h1>
+            <figure class="figure d-flex justify-content-center">
+              <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}"
+                   class="figure-img img-fluid rounded" alt="...">
+            </figure>
+            <hr>
+            <ul class="list-unstyled fw-light fs-6">
+              <li class="d-flex">
+                <div class="flex-grow-1">Тип:</div>
+                <div>{{ product.voltage_input_type }}</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Мощность:</div>
+                <div>{{ product.power }} Вт</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Вес:</div>
+                <div>{{ product.weight }} кг</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1 fs-5">Цена:</div>
+                <div class="fw-normal fs-5">{{ product.price }} р.</div>
+              </li>
+              <li class=""></li>
+            </ul>
+            <div class="d-grid mt-2">
+              <a class="btn btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div><!--Однофазные модели Optimum-->
+        <div class="tab-pane fade" id="infinity_one" role="tabpanel"><!--Однофазные модели INFINITY -->
+          <div class="row">
+          {% for product in energotech_onephase_infinity %}
+          <div class="col-6">
+            <h1 class="text-center display-4">{{ product.model }}</h1>
+            <figure class="figure d-flex justify-content-center">
+              <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}"
+                   class="figure-img img-fluid rounded" alt="...">
+            </figure>
+            <hr>
+            <ul class="list-unstyled fw-light fs-6">
+              <li class="d-flex">
+                <div class="flex-grow-1">Тип:</div>
+                <div>{{ product.voltage_input_type }}</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Мощность:</div>
+                <div>{{ product.power }} Вт</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Вес:</div>
+                <div>{{ product.weight }} кг</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1 fs-5">Цена:</div>
+                <div class="fw-normal fs-5">{{ product.price }} р.</div>
+              </li>
+              <li class=""></li>
+            </ul>
+            <div class="d-grid mt-2">
+              <a class="btn btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div><!--Однофазные модели INFINITY-->
+        </div>
+
       </div>
-    </div>
-    {% endfor %}
-  </div>
+      <div class="tab-pane fade" id="threephase" role="tabpanel"><!--Трехфаные модели-->
+        <ul class="nav nav-pills nav-justified" id="three_tablist" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#optimum_three" type="button"
+                    role="tab" aria-selected="true">OPTIMUM+
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#infinity_three" type="button"
+                    role="tab" aria-selected="false">INFINITY
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="optimum_three" role="tabpanel">
+      <div class="row">
+          {% for product in energotech_treephase_optimum %}
+          <div class="col-6">
+            <h1 class="text-center display-4">{{ product.model }}</h1>
+            <figure class="figure d-flex justify-content-center">
+              <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}"
+                   class="figure-img img-fluid rounded" alt="...">
+            </figure>
+            <hr>
+            <ul class="list-unstyled fw-light fs-6">
+              <li class="d-flex">
+                <div class="flex-grow-1">Тип:</div>
+                <div>{{ product.voltage_input_type }}</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Мощность:</div>
+                <div>{{ product.power }} Вт</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Вес:</div>
+                <div>{{ product.weight }} кг</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1 fs-5">Цена:</div>
+                <div class="fw-normal fs-5">{{ product.price }} р.</div>
+              </li>
+              <li class=""></li>
+            </ul>
+            <div class="d-grid mt-2">
+              <a class="btn btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+        <div class="tab-pane fade" id="infinity_three" role="tabpanel">
+      <div class="row">
+          {% for product in energotech_treephase_infinity %}
+          <div class="col-6">
+            <h1 class="text-center display-4">{{ product.model }}</h1>
+            <figure class="figure d-flex justify-content-center">
+              <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}"
+                   class="figure-img img-fluid rounded" alt="...">
+            </figure>
+            <hr>
+            <ul class="list-unstyled fw-light fs-6">
+              <li class="d-flex">
+                <div class="flex-grow-1">Тип:</div>
+                <div>{{ product.voltage_input_type }}</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Мощность:</div>
+                <div>{{ product.power }} Вт</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Вес:</div>
+                <div>{{ product.weight }} кг</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1 fs-5">Цена:</div>
+                <div class="fw-normal fs-5">{{ product.price }} р.</div>
+              </li>
+              <li class=""></li>
+            </ul>
+            <div class="d-grid mt-2">
+              <a class="btn btn-primary" href="view_products/{{ product.model_link }}">Подробрнее..</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+        </div>
+
+      </div>
+    </div><!-- PILLS IN TABS -->
+
+
+
+
+
+
+
+
   <!-- Brand «ЭНЕРГОТЕХ» -->
 
    <!-- Brand «ВОЛЬТ ENGINEERING» -->
@@ -312,6 +488,11 @@
       });
     });
   </script>
-
-
+    <script>
+    $("ul.nav-tabs a").click(function (e) {
+      e.preventDefault();
+        $(this).tab('show');
+      });
+    </script>
 </div>
+    </div>

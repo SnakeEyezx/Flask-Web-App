@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="892e40a4-8234-45c4-8512-1073b0f956be" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/Energotech_type_tabs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stab.py" beforeDir="false" afterPath="$PROJECT_DIR$/stab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/add_description.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_description.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/temp.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/temp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/view_products.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_products.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test1.db" beforeDir="false" afterPath="$PROJECT_DIR$/test1.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +29,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/templates/index.html" root0="SKIP_INSPECTION" />
