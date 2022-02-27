@@ -84,14 +84,24 @@
     <h1 class="display-2 text-center">{{ product.brand }}</h1>
     <h1 class="display-3 text-center">{{ product.model }} {{ product.power }}</h1>
     <div class="col-12">
-      <div class="ModelViewSlider" id="photo_swipe">
-        <div><img src="../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/01.jpg" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
-        <div><img src="../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/02.jpg" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
-        <div><img src="../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/03.jpg" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
-        <div><img src="../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/04.jpg" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
-      </div>
-
-      <h1 class="display-4">Цена: {{ product.price }}$</h1>
+      {% if product.model == "АМПЕР" %}
+              <div class="ModelViewSlider" id="photo_swipe">
+                <div><img src="{{ url_for('static', filename='media/volt-amper/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-amper/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-amper/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-amper/07.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-amper/08.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+              {% else %}
+              <div class="ModelViewSlider " id="photo_swipe">
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/05.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/06.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+              {% endif %}
+      <h1 class="display-4">Цена: {{ product.price }} р.</h1>
       {% for model_description in model_descriptions %}
       <p class="h4">Описание</p>
         <p class="lead">
@@ -106,7 +116,11 @@
           <tbody class="">
           <tr>
           <td>Мощность</td>
-          <td class="text-center align-middle">{{ product.power }} Вт</td>
+            {% if product.voltage_input_type == "Однофазный" %}
+              <td class="text-center align-middle">{{ product.power }} Вт</td>
+            {% else %}
+              <td class="text-center align-middle">{{ product.power }}х3 Вт</td>
+            {% endif %}
           </tr>
           <tr>
           <td>Тип</td>
@@ -223,40 +237,68 @@
   <script type="text/javascript" src="{{ url_for('static', filename='slick/slick.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/photoswipe.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/photoswipe-ui-default.min.js') }}"></script>
-
-  <script type="text/javascript">
+  <script>
     var openPhotoSwipe = function() {
     var pswpElement = document.querySelectorAll('.pswp')[0];
 
     // build items array
+{% if product.model == "АМПЕР" %}
     var items = [
-        {
-            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/01 OPTIMUM 5000 al.jpg',
+            {
+            src: '{{ url_for('static', filename='media/volt-amper/01_big.jpg') }}',
             w: 964,
             h: 1024
         },
         {
-            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/02 OPTIMUM 5000 al.jpg',
+            src: '{{ url_for('static', filename='media/volt-amper/03_big.jpg') }}',
             w: 964,
             h: 1024
         },
         {
-            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/03 OPTIMUM 5000 al.jpg',
+            src: '{{ url_for('static', filename='media/volt-amper/04_big.jpg') }}',
             w: 964,
             h: 1024
         },
         {
-            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/04 OPTIMUM 5000 al.jpg',
+            src: '{{ url_for('static', filename='media/volt-amper/05_big.jpg') }}',
             w: 964,
             h: 1024
         },
         {
-            src: '../static/media/{{ product.brand }}/{{ product.model }}{{ product.power }}/05 OPTIMUM 5000 al.jpg',
+            src: '{{ url_for('static', filename='media/volt-amper/06_big.jpg') }}',
             w: 964,
-            h: 600
+            h: 1024
         }
     ];
-
+{% else %}
+var items = [
+            {
+            src: '{{ url_for('static', filename='media/volt-gibrid/01_big.jpg') }}',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: '{{ url_for('static', filename='media/volt-gibrid/02_big.jpg') }}',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: '{{ url_for('static', filename='media/volt-gibrid/04_big.jpg') }}',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: '{{ url_for('static', filename='media/volt-gibrid/05_big.jpg') }}',
+            w: 964,
+            h: 1024
+        },
+        {
+            src: '{{ url_for('static', filename='media/volt-gibrid/06_big.jpg') }}',
+            w: 964,
+            h: 1024
+        }
+    ];
+{% endif %}
     // define options (if needed)
     var options = {
        // history & focus options are disabled on CodePen
@@ -283,7 +325,6 @@ document.getElementById('photo_swipe').onclick = openPhotoSwipe;
         arrows: false,
         speed: 500,
         centerMode: true,
-        centerPadding: '80px',
         autoplay: true,
         autoplaySpeed: 1500,
       });

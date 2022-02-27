@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from transliterate import slugify
 
@@ -13,7 +13,7 @@ class Product(db.Model):
     brand = db.Column(db.String(30), nullable=False)
     power = db.Column(db.Integer, nullable=False)
     voltage_input_type = db.Column(db.String(30), nullable=False)
-    price = db.Column(db.String(30), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     weight = db.Column(db.Integer, nullable=False)
     model_link = db.Column(db.String(150), nullable=False, unique=True)
 
@@ -44,15 +44,16 @@ class Description(db.Model):
 
 @app.route("/")
 def index():
-    energotech_onephase_optimum = Product.query.filter_by(brand="Энерготех", voltage_input_type="Однофазный",
-                                                          model='Optimum+')
+    energotech_onephase_optimum = Product.query.filter_by(brand="Энерготех",
+                                                          voltage_input_type="Однофазный",
+                                                          model='Optimum+').order_by(Product.power.asc())
     energotech_onephase_infinity = Product.query.filter_by(brand="Энерготех", voltage_input_type="Однофазный",
-                                                           model='INFINITY')
+                                                           model='INFINITY').order_by(Product.power.asc())
     energotech_treephase_optimum = Product.query.filter_by(brand="Энерготех", voltage_input_type="Трехфазный",
-                                                           model='Optimum+')
+                                                           model='Optimum+').order_by(Product.power.asc())
     energotech_treephase_infinity = Product.query.filter_by(brand="Энерготех", voltage_input_type="Трехфазный",
-                                                            model='INFINITY')
-    volt = Product.query.filter_by(brand="Вольт")
+                                                            model='INFINITY').order_by(Product.power.asc())
+    volt = Product.query.filter_by(brand="ВОЛЬТ")
     elim = Product.query.filter_by(brand="Элим")
     descr = Description.query.filter_by(brand="Энерготех")
     return render_template('index.html', energotech_onephase_optimum=energotech_onephase_optimum,
@@ -85,7 +86,7 @@ def add_product():
             db.session.add(new_product)
             db.session.commit()
         finally:
-            return "Product added, done!"
+            return render_template('add_product.html')
     else:
         return render_template('add_product.html')
 
@@ -140,11 +141,55 @@ def view_products(single_model_link):
     return render_template('view_products.html', product=product, model_descriptions=description_query)
 
 
-@app.route("/reset")
-def reset():
-    db.drop_all()
-    db.create_all()
-    return "Reset done!"
+# @app.route("/reset")
+# def reset():
+#     db.drop_all()
+#     db.create_all()
+#     return "Reset done!"
+
+
+@app.route("/manage")
+def manage():
+    products = Product.query.order_by(Product.model.desc(),
+                                      Product.voltage_input_type.asc(),
+                                      Product.price.desc()).all()
+    return render_template('manage.html', products=products)
+
+
+@app.route("/delete", methods=['POST'])
+def delete():
+    product_model_link = request.form['model_link']
+    try:
+        Product.query.filter_by(model_link=product_model_link).delete()
+        db.session.commit()
+    except Exception as err:
+        print('Query Failed: Error: %s' % (str(err)))
+    finally:
+        return redirect('/manage')
+
+
+@app.route("/update", methods=['POST'])
+def update():
+    product_model_link = request.form['model_link']
+    product_model_name = request.form['model']
+    product_brand_name = request.form['brand']
+    product_voltage_input_type = request.form['voltage_input_type']
+    product_price = request.form['price']
+    product_power = request.form['power']
+    product_link = slugify(' '.join(str(item) for item in [product_brand_name, product_model_name,
+                                                           product_power, product_voltage_input_type]))
+    try:
+        Product.query.filter_by(model_link=product_model_link).update(dict(model=product_model_name,
+                                                                           brand=product_brand_name,
+                                                                           voltage_input_type=product_voltage_input_type,
+                                                                           price=product_price,
+                                                                           power=product_power,
+                                                                           model_link=product_link))
+        db.session.commit()
+    except Exception as err:
+        print('Query Failed: Error: %s' % (str(err)))
+    finally:
+        return redirect('/manage')
 
 
 if __name__ == "__main__":

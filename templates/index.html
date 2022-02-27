@@ -85,8 +85,8 @@
   </div>
   <div class="">
     <div class="stabslider1 mt-4">
-      <div class="card mx-2">
-        <img src="{{ url_for('static', filename='media/01 OPTIMUM 5000_200x150_c4c.jpg') }}" class="card-img-top" alt="...">
+      <div class="card mx-3">
+        <img src="{{ url_for('static', filename='media/01TOP.jpg') }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Card title1</h5>
           <hr>
@@ -98,8 +98,8 @@
 
         </div>
       </div>
-      <div class="card mx-2">
-        <img src="{{ url_for('static', filename='media/01 UNIVERSAL 5000_200x150_c4c.jpg') }}" class="card-img-top" alt="...">
+      <div class="card mx-3">
+        <img src="{{ url_for('static', filename='media/01TOP.jpg') }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Card title2</h5>
           <hr>
@@ -111,8 +111,8 @@
 
         </div>
       </div>
-      <div class="card mx-2">
-        <img src="{{ url_for('static', filename='media/01 PRIME 6000_200x150_c4c.jpg') }}" class="card-img-top" alt="...">
+      <div class="card mx-3">
+        <img src="{{ url_for('static', filename='media/01TOP.jpg') }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title text-center">Card title3</h5>
           <hr>
@@ -145,12 +145,12 @@
     <div class="col-12">
       <ul class="nav nav-tabs nav-fill" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#onephase" type="button"
+          <button class="nav-link active slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#onephase" type="button"
                   role="tab" aria-controls="home" aria-selected="true">Однофазные
           </button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#threephase" type="button"
+          <button class="nav-link slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#threephase" type="button"
                   role="tab" aria-controls="profile" aria-selected="false">Трехфазные
           </button>
         </li>
@@ -162,27 +162,37 @@
       <div class="tab-pane fade show active" id="onephase" role="tabpanel"><!--Однофаные модели-->
         <ul class="nav nav-pills nav-justified" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#optimum_one" type="button"
+            <button class="nav-link active slickSlideRefresh slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#optimum_one" type="button"
                     role="tab" aria-selected="true">OPTIMUM+
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#infinity_one" type="button"
+            <button class="nav-link slickSlideRefresh slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#infinity_one" type="button"
                     role="tab" aria-selected="false">INFINITY
             </button>
           </li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade show active" id="optimum_one" role="tabpanel">
-
           <div class="row">
           {% for product in energotech_onephase_optimum %}
           <div class="col-6">
             <h1 class="text-center display-4">{{ product.model }}</h1>
-            <figure class="figure d-flex justify-content-center">
-              <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}"
-                   class="figure-img img-fluid rounded" alt="...">
-            </figure>
+            {% if product.voltage_input_type == "Однофазный" %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+            {% else %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+            {% endif %}
             <hr>
             <ul class="list-unstyled fw-light fs-6">
               <li class="d-flex">
@@ -215,10 +225,21 @@
           {% for product in energotech_onephase_infinity %}
           <div class="col-6">
             <h1 class="text-center display-4">{{ product.model }}</h1>
-            <figure class="figure d-flex justify-content-center">
-              <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}"
-                   class="figure-img img-fluid rounded" alt="...">
-            </figure>
+            {% if product.voltage_input_type == "Однофазный" %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+            {% else %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+            {% endif %}
             <hr>
             <ul class="list-unstyled fw-light fs-6">
               <li class="d-flex">
@@ -249,15 +270,15 @@
         </div>
 
       </div>
-      <div class="tab-pane fade" id="threephase" role="tabpanel"><!--Трехфаные модели-->
+      <div class="tab-pane fade" id="threephase" role="tabpanel">
         <ul class="nav nav-pills nav-justified" id="three_tablist" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#optimum_three" type="button"
+            <button class="nav-link active slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#optimum_three" type="button"
                     role="tab" aria-selected="true">OPTIMUM+
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#infinity_three" type="button"
+            <button class="nav-link slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#infinity_three" type="button"
                     role="tab" aria-selected="false">INFINITY
             </button>
           </li>
@@ -268,10 +289,21 @@
           {% for product in energotech_treephase_optimum %}
           <div class="col-6">
             <h1 class="text-center display-4">{{ product.model }}</h1>
-            <figure class="figure d-flex justify-content-center">
-              <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}"
-                   class="figure-img img-fluid rounded" alt="...">
-            </figure>
+            {% if product.voltage_input_type == "Однофазный" %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+            {% else %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+            {% endif %}
             <hr>
             <ul class="list-unstyled fw-light fs-6">
               <li class="d-flex">
@@ -304,10 +336,21 @@
           {% for product in energotech_treephase_infinity %}
           <div class="col-6">
             <h1 class="text-center display-4">{{ product.model }}</h1>
-            <figure class="figure d-flex justify-content-center">
-              <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}"
-                   class="figure-img img-fluid rounded" alt="...">
-            </figure>
+            {% if product.voltage_input_type == "Однофазный" %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+            {% else %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+            {% endif %}
             <hr>
             <ul class="list-unstyled fw-light fs-6">
               <li class="d-flex">
@@ -337,8 +380,8 @@
       </div>
         </div>
 
-      </div>
-    </div><!-- PILLS IN TABS -->
+      </div><!--Трехфаные модели INFINITY -->
+    </div>
 
 
 
@@ -365,15 +408,45 @@
     {% for product in volt %}
     <div class="col-6">
       <h5 class="text-center display-4">{{ product.model }}</h5>
-      <figure class="figure">
-        <img src="{{ url_for('static', filename='media/01 TOP 6000_200x150_c4c.jpg') }}" class="figure-img img-fluid rounded" alt="...">
-      </figure>
+               {% if product.model == "АМПЕР" %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/volt-amper/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-amper/03.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-amper/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-amper/07.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-amper/08.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+              {% else %}
+              <div class="ModelViewSlider">
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/01.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/02.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/04.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/05.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+                <div><img src="{{ url_for('static', filename='media/volt-gibrid/06.jpg') }}" class="mx-auto" alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+              </div>
+              {% endif %}
       <hr>
-      <p>
-        power: {{ product.power }} <br> price: {{ product.price }}$
-      </p>
+      <ul class="list-unstyled fw-light fs-6">
+              <li class="d-flex">
+                <div class="flex-grow-1">Тип:</div>
+                <div>{{ product.voltage_input_type }}</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Мощность:</div>
+                <div>{{ product.power }} Вт</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1">Вес:</div>
+                <div>{{ product.weight }} кг</div>
+              </li>
+              <li class="d-flex">
+                <div class="flex-grow-1 fs-5">Цена:</div>
+                <div class="fw-normal fs-5">{{ product.price }} р.</div>
+              </li>
+              <li class=""></li>
+            </ul>
       <div class="d-grid gap-2 mt-5">
-        <a class="btn btn-lg btn-primary" href="view_products/{{ volt.model_link}}">Подробрнее..</a>
+        <a class="btn btn-lg btn-primary" href="view_products/{{ product.model_link}}">Подробрнее..</a>
       </div>
     </div>
     {% endfor %}
@@ -479,15 +552,26 @@
       });
       $('.ModelViewSlider').slick({
         infinite: true,
-        autoplay: true,
-        autoplaySpeed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        speed: 800,
+        speed: 500,
+        autoplay: true,
+        mobileFirst: true,
+        pauseOnHover: false,
       });
     });
   </script>
+    <script>
+    $(".slickSlideRefresh").on('click', function () {
+      // $('.ModelViewSlider').slick('reinit');
+      $('.ModelViewSlider').slick('slickGoTo', 1);
+      });
+    </script>
+
+
+
+
     <script>
     $("ul.nav-tabs a").click(function (e) {
       e.preventDefault();
