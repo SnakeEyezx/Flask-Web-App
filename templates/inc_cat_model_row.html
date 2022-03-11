@@ -1,0 +1,66 @@
+<div class="col-6 col-lg-4">
+    {% if product.brand == 'Энерготех' %}
+    <div class="ModelViewSlider">
+        <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/01.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/02.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/03.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/' + product.model_link +'/04.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+    </div>
+    {% elif product.model == 'АМПЕР' %}
+    <div class="ModelViewSlider">
+        <div><img src="{{ url_for('static', filename='media/volt-amper/01.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/volt-amper/03.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/volt-amper/04.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/volt-amper/07.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/volt-amper/08.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+    </div>
+    {% elif product.model == 'ГИБРИД' %}
+    <div class="ModelViewSlider">
+        <div><img src="{{ url_for('static', filename='media/volt-gibrid/01.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/volt-gibrid/02.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/volt-gibrid/04.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/volt-gibrid/05.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+        <div><img src="{{ url_for('static', filename='media/volt-gibrid/06.jpg') }}" class="mx-auto"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+    </div>
+    {% elif product.model == 'СНАН' %}
+        <div class="text-center"><img src="{{ url_for('static', filename='media/elim/01.jpg') }}" class="mx-auto img-fluid"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+    {% else %}
+        <div class="text-center"><img src="{{ url_for('static', filename='media/elim/02.jpg') }}" class="mx-auto img-fluid"
+                  alt="{{ product.brand }} {{ product.model }} {{ product.power }}"></div>
+    {% endif %}
+    <h2 class="text-center display-6">{{ product.model }}</h2>
+    <hr>
+    <ul class="list-unstyled fw-light fs-6">
+        <li class="d-flex">
+            <div class="flex-grow-1">Тип:</div>
+            <div>{{ product.voltage_input_type }}</div>
+        </li>
+        <li class="d-flex">
+            <div class="flex-grow-1">Мощность:</div>
+            <div>{{ product.power }} Вт</div>
+        </li>
+        <li class="d-flex">
+            <div class="flex-grow-1 fs-5">Цена:</div>
+            <div class="fw-normal fs-5">{{ product.price }} р.</div>
+        </li>
+        <li class=""></li>
+    </ul>
+    <div class="d-grid mt-2 pb-2">
+        <a class="btn btn-primary shadowButton" href="view_products/{{ product.model_link }}">Подробрнее..</a>
+    </div>
+</div>

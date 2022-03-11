@@ -34,5 +34,27 @@
         </div>
     </div>
 </div>
+<hr>
+<div class="container">
+    <div class="row">
+        {% for desc in descriptions %}
+        <div class="col-6 mt-2">
+            <form class="" action="/update_desc" method="post">
+                <input class="form-control mb-1" type="text" placeholder="model" name="desc_id"
+                       value="{{ desc.id }}">
+                <input class="form-control mb-1" type="text" placeholder="model" name="model"
+                       value="{{ desc.model }}">
+                <input class="form-control mb-1" type="text" placeholder="model" name="model"
+                       value="{{ desc.brand }}">
+                <input class="form-control mb-1" type="text" placeholder="brand" name="description"
+                       value="{{ desc.description }}">
+                <input class="form-control mb-1" type="text" placeholder="voltage_input_type" name="voltage_input_type"
+                       value="{{ desc.voltage_input_type }}">
+                <input class="btn btn-primary my-2" type="submit" value="update">
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 </body>
 </html>

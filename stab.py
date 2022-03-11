@@ -44,24 +44,8 @@ class Description(db.Model):
 
 @app.route("/")
 def index():
-    energotech_onephase_optimum = Product.query.filter_by(brand="Энерготех",
-                                                          voltage_input_type="Однофазный",
-                                                          model='Optimum+').order_by(Product.power.asc())
-    energotech_onephase_infinity = Product.query.filter_by(brand="Энерготех", voltage_input_type="Однофазный",
-                                                           model='INFINITY').order_by(Product.power.asc())
-    energotech_treephase_optimum = Product.query.filter_by(brand="Энерготех", voltage_input_type="Трехфазный",
-                                                           model='Optimum+').order_by(Product.power.asc())
-    energotech_treephase_infinity = Product.query.filter_by(brand="Энерготех", voltage_input_type="Трехфазный",
-                                                            model='INFINITY').order_by(Product.power.asc())
-    volt = Product.query.filter_by(brand="ВОЛЬТ")
-    elim = Product.query.filter_by(brand="Элим")
-    descr = Description.query.filter_by(brand="Энерготех")
-    return render_template('index.html', energotech_onephase_optimum=energotech_onephase_optimum,
-                           energotech_onephase_infinity=energotech_onephase_infinity,
-                           energotech_treephase_optimum=energotech_treephase_optimum,
-                           energotech_treephase_infinity=energotech_treephase_infinity,
-                           volt=volt, elim=elim,
-                           descr=descr)
+    products = Product.query.all()
+    return render_template('index.html', products=products)
 
 
 @app.route("/add_product", methods=['POST', 'GET'])
@@ -85,6 +69,8 @@ def add_product():
         try:
             db.session.add(new_product)
             db.session.commit()
+        except Exception as err:
+            print(f'Query Failed: Error: {err}')
         finally:
             return render_template('add_product.html')
     else:
@@ -126,11 +112,12 @@ def add_description():
             db.session.add(new_description)
             db.session.commit()
         except Exception as err:
-            print('Query Failed: %s\nError: %s' % (new_description, str(err)))
+            print(f'Query Failed: Error: {err}')
         finally:
             return "Descr added!"
     else:
-        return render_template('add_description.html')
+        descriptions = Description.query.all()
+        return render_template('add_description.html', descriptions=descriptions)
 
 
 @app.route("/view_products/<single_model_link>")
@@ -153,7 +140,8 @@ def manage():
     products = Product.query.order_by(Product.model.desc(),
                                       Product.voltage_input_type.asc(),
                                       Product.price.desc()).all()
-    return render_template('manage.html', products=products)
+    descriptions = Description.query.all()
+    return render_template('manage.html', products=products, descriptions=descriptions)
 
 
 @app.route("/delete", methods=['POST'])
@@ -163,7 +151,7 @@ def delete():
         Product.query.filter_by(model_link=product_model_link).delete()
         db.session.commit()
     except Exception as err:
-        print('Query Failed: Error: %s' % (str(err)))
+        print(f'Query Failed: Error: {err}')
     finally:
         return redirect('/manage')
 
@@ -187,9 +175,22 @@ def update():
                                                                            model_link=product_link))
         db.session.commit()
     except Exception as err:
-        print('Query Failed: Error: %s' % (str(err)))
+        print(f'Query Failed: Error: {err}')
     finally:
         return redirect('/manage')
+
+
+@app.route("/update_desc", methods=['POST'])
+def update_desc():
+    desc_id = request.form['desc_id']
+    desc_description = request.form['description']
+    try:
+        Description.query.filter_by(id=desc_id).update(dict(description=desc_description))
+        db.session.commit()
+    except Exception as err:
+        print(f'Query Failed: Error: {err}')
+    finally:
+        return redirect('/add_description')
 
 
 if __name__ == "__main__":

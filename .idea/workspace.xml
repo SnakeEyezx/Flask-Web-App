@@ -5,16 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="892e40a4-8234-45c4-8512-1073b0f956be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/manage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/catalog_tabs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/inc_carousel.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/inc_cat_model_row.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/inc_footer_menu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/inc_head.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/inc_nav.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/inc_photoswipe.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/old_catalog_tabs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ymaps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stab.py" beforeDir="false" afterPath="$PROJECT_DIR$/stab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/01 OPTIMUM 5000_200x150_c4c.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/01 PRIME 6000_200x150_c4c.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/01 TOP 6000_200x150_c4c.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/media/01 UNIVERSAL 5000_200x150_c4c.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/add_product.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/add_description.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_description.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/manage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/view_products.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_products.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test1.db" beforeDir="false" afterPath="$PROJECT_DIR$/test1.db" afterDir="false" />
     </list>
@@ -58,7 +63,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../pythonProject/main.py" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.HTML" />
   </component>
   <component name="RunManager" selected="Python.stab">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">

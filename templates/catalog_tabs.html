@@ -1,0 +1,59 @@
+<nav>
+      <ul class="nav nav-pills nav-fill mb-3 row-cols-2 row-cols-lg-4 g-3" id="pills-tab" role="tablist">
+      <li class="nav-item p-2" role="presentation">
+        <button class="nav-link text-center shadow border border-primary slickSlideRefresh active" data-bs-toggle="pill" data-bs-target="#op-opt" type="button" role="tab" aria-selected="true">Однофазные<br>Optimum+</button>
+      </li>
+      <li class="nav-item p-2" role="presentation">
+        <button class="nav-link text-center shadow border border-primary slickSlideRefresh" data-bs-toggle="pill" data-bs-target="#op-inf" type="button" role="tab" aria-selected="false">Однофазные<br>Infinity</button>
+      </li>
+      <li class="nav-item p-2" role="presentation">
+        <button class="nav-link text-center shadow border border-primary slickSlideRefresh" data-bs-toggle="pill" data-bs-target="#tp-opt" type="button" role="tab" aria-selected="false">Трехфазные<br>Optimum+</button>
+      </li>
+      <li class="nav-item p-2" role="presentation">
+        <button class="nav-link text-center shadow border border-primary slickSlideRefresh" data-bs-toggle="pill" data-bs-target="#tp-inf" type="button" role="tab" aria-selected="false">Трехфазные<br>Infinity</button>
+      </li>
+      </ul>
+    </nav>
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="op-opt" role="tabpanel">
+        <div class="row">
+          {% for product in products %}
+          {% if product.brand == 'Энерготех' and product.voltage_input_type == "Однофазный" and product.model ==
+          'Optimum+' %}
+          {% include 'inc_cat_model_row.html' %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="tab-pane fade" id="op-inf" role="tabpanel">
+        <div class="row">
+          {% for product in products %}
+          {% if product.brand == 'Энерготех' and product.voltage_input_type == "Однофазный" and product.model ==
+          'INFINITY' %}
+          {% include 'inc_cat_model_row.html' %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="tab-pane fade" id="tp-opt" role="tabpanel">
+        <div class="row">
+          {% for product in products %}
+          {% if product.brand == 'Энерготех' and product.voltage_input_type == "Трехфазный" and product.model ==
+          'Optimum+' %}
+          {% include 'inc_cat_model_row.html' %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="tab-pane fade" id="tp-inf" role="tabpanel">
+        <div class="row">
+          {% for product in products %}
+          {% if product.brand == 'Энерготех' and product.voltage_input_type == "Трехфазный" and product.model ==
+          'INFINITY' %}
+          {% include 'inc_cat_model_row.html' %}
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,110 @@
+  <!-- Brand «ЭНЕРГОТЕХ» -->
+  <div class="row my-5 gy-3">
+    <div class="col-12">
+      <h1 class="display-5 text-center">«ЭНЕРГОТЕХ»</h1>
+      <hr>
+    </div>
+    <div class="col-12">
+      <p>Отличаются высокой надежностью и безупречным качеством изготовления на современном оборудовании.
+        Стабилизаторы тиристорного типа с инновационным алгоритмом управления. Изготовлены в России. Гарантийный срок
+        эксплуатации от 5 до 10 лет.
+        Применяются в быту, коммерческих объектах ,промышленности.</p>
+    </div>
+
+    <div class="col-12">
+      <ul class="nav nav-tabs nav-fill" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#onephase" type="button"
+                  role="tab" aria-controls="home" aria-selected="true">Однофазные
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#threephase" type="button"
+                  role="tab" aria-controls="profile" aria-selected="false">Трехфазные
+          </button>
+        </li>
+      </ul>
+      <h1 class="display-5 text-center my-5">Модели:</h1>
+    </div><!-- TABS NAV -->
+
+    <div class="tab-content">
+      <!--Однофаные модели-->
+      <div class="tab-pane fade show active" id="onephase" role="tabpanel">
+        <ul class="nav nav-pills nav-justified" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active slickSlideRefresh slickSlideRefresh" data-bs-toggle="tab"
+                    data-bs-target="#optimum_one" type="button"
+                    role="tab" aria-selected="true">OPTIMUM+
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link slickSlideRefresh slickSlideRefresh" data-bs-toggle="tab"
+                    data-bs-target="#infinity_one" type="button"
+                    role="tab" aria-selected="false">INFINITY
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="optimum_one" role="tabpanel">
+            <div class="row">
+              {% for product in products %}
+              {% if product.brand == 'Энерготех' and product.voltage_input_type == "Однофазный" and product.model ==
+              'Optimum+' %}
+              {% include 'inc_cat_model_row.html' %}
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="infinity_one" role="tabpanel">
+            <div class="row">
+              {% for product in products %}
+              {% if product.brand == 'Энерготех' and product.voltage_input_type == "Однофазный" and product.model ==
+              'INFINITY' %}
+              {% include 'inc_cat_model_row.html' %}
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="threephase" role="tabpanel">
+        <!--Трехфаные модели -->
+        <ul class="nav nav-pills nav-justified" id="three_tablist" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#optimum_three"
+                    type="button"
+                    role="tab" aria-selected="true">OPTIMUM+ х3
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link slickSlideRefresh" data-bs-toggle="tab" data-bs-target="#infinity_three"
+                    type="button"
+                    role="tab" aria-selected="false">INFINITY х3
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="optimum_three" role="tabpanel">
+            <div class="row">
+              {% for product in products %}
+              {% if product.brand == 'Энерготех' and product.voltage_input_type == "Трехфазный" and product.model ==
+              'Optimum+' %}
+              {% include 'inc_cat_model_row.html' %}
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="infinity_three" role="tabpanel">
+            <div class="row">
+              {% for product in products %}
+              {% if product.brand == 'Энерготех' and product.voltage_input_type == "Трехфазный" and product.model ==
+              'INFINITY' %}
+              {% include 'inc_cat_model_row.html' %}
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
